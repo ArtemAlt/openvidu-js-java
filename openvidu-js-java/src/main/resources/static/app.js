@@ -9,10 +9,11 @@ var token;			// Token retrieved from OpenVidu Server
 
 function joinSession() {
 	getToken((token) => {
-
+console.log(token);
 		// --- 1) Get an OpenVidu object ---
 
 		OV = new OpenVidu();
+
 
 		// --- 2) Init a session ---
 

@@ -57,7 +57,7 @@ public class SessionController {
 		} catch (Exception e) {
 			return getErrorResponse(e);
 		}
-		System.out.println("Getting a token from OpenVidu Server | {sessionName}=" + sessionNameParam);
+		System.err.println("Getting a token from OpenVidu Server | {sessionName}=" + sessionNameParam);
 
 		JSONObject sessionJSON = (JSONObject) new JSONParser().parse(sessionNameParam);
 
@@ -72,6 +72,7 @@ public class SessionController {
 		// object on login
 		String serverData = "{\"serverData\": \"" + httpSession.getAttribute("loggedUser") + "\"}";
 
+		System.err.println("Server data - "+ serverData);
 		// Build connectionProperties object with the serverData and the role
 		ConnectionProperties connectionProperties = new ConnectionProperties.Builder().type(ConnectionType.WEBRTC).data(serverData).role(role).build();
 
@@ -114,6 +115,7 @@ public class SessionController {
 			Session session = this.openVidu.createSession();
 			// Generate a new Connection with the recently created connectionProperties
 			String token = session.createConnection(connectionProperties).getToken();
+			System.err.println("Session token - "+token);
 
 			// Store the session and the token in our collections
 			this.mapSessions.put(sessionName, session);
